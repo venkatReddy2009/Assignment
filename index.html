@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Assignment</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        table {
+            width: 60%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #ccc;
+        }
+        .gallery {
+            margin-top: 20px;
+        }
+        .gallery img {
+            height: 100px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        #largeImage {
+            width: 400px;
+            height: auto;
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Searchable Table</h2>
+<input type="text" id="search" placeholder="Search by name or email..." />
+
+<table id="dataTable">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>Venkat reddy</td><td>venkatreddy@gmail.com</td></tr>
+        <tr><td>sai teja</td><td>saiteja@gmail.com</td></tr>
+        <tr><td>Kumar rao</td><td>kumarrao@gmail.com</td></tr>
+        <tr><td>Reddy sailaja</td><td>reddysailaja@gmail.com</td></tr>
+        <tr><td>sathi rakesh</td><td>sathirakesh@gmail.com</td></tr>
+    </tbody>
+</table>
+
+<div class="gallery">
+    <h2>Image Gallery</h2>
+    <img id="largeImage" src="Main.png" alt="Large View" />
+    <div>
+        <img src="bg_1.png" class="thumbnail" alt="Image 1">
+        <img src="bg_2.png" class="thumbnail" alt="Image 2">
+        <img src="bg_3.png" class="thumbnail" alt="Image 3">
+        <img src="bg_4.png" class="thumbnail" 	alt="Image 4">
+    </div>
+</div>
+
+<script>
+    // Real-time Table Filtering
+    $('#search').on('keyup', function() {
+        var value = $(this).val().toLowerCase();
+        $('#dataTable tbody tr').filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+        });
+    });
+
+    // Dynamic Image Gallery
+    $('.thumbnail').on('click', function() {
+         var newSrc = $(this).attr('src');           
+         var oldSrc = $('#largeImage').attr('src'); 
+
+         $('#largeImage').attr('src', newSrc);       
+         $(this).attr('src', oldSrc);       
+         $(this).data('full', oldSrc);   
+       
+    });
+</script>
+
+</body>
+</html>
